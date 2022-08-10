@@ -5,8 +5,8 @@ Created on Wed Oct  2 12:57:42 2019
 @author: 14342
 """
 
-data_dir = "/Users/esestaff/Documents/GitHub/Hierarchical-DNN-Activity-Recognition/datasets/"
-cvdir = "/Users/esestaff/Documents/GitHub/Hierarchical-DNN-Activity-Recognition/cv_5_folds/"
+data_dir = "C:/Users/Jonas/Documents/GitHub/HHAR-Net/teste/"
+cvdir = "C:/Users/Jonas/Documents/GitHub/HHAR-Net/cv_5_folds/"
 
 
 

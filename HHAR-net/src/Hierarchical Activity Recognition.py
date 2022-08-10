@@ -6,7 +6,7 @@ Created on Wed Sep 11 12:56:34 2019
 """
 # first neural network with keras tutorial
 import os
-os.chdir('/Users/esestaff/Documents/GitHub/Hierarchical-DNN-Activity-Recognition')
+os.chdir(r'C:\Users\Jonas\Documents\GitHub\HHAR-Net')
 
 import warnings
 warnings.filterwarnings("ignore")
