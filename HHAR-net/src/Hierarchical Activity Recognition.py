@@ -6,7 +6,7 @@ Created on Wed Sep 11 12:56:34 2019
 """
 # first neural network with keras tutorial
 import os
-os.chdir(r'C:\Users\Jonas\Documents\GitHub\HHAR-Net')
+os.chdir(r'C:\Users\prfev\Desktop\jsf\HHAR-Net')
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -133,7 +133,9 @@ def data_cleaner(dataset, feature_set_range, parent_labels, child_labels=None):
         return(X_parent, y_parent)
         
 def return_accuracy(clf):
-    y_pred = clf.predict_classes(X_test)
+    #y_pred = clf.predict_classes(X_test)
+    predict_x=clf.predict(X_test) 
+    y_pred=np.argmax(predict_x,axis=1)
     f1_accuracy['flat'] = f1_score(y_test.values, y_pred, average='macro')
     BA_accuracy['flat'] = balanced_accuracy_score(y_test.values, y_pred)
     accuracy['flat'] = accuracy_score(y_test.values, y_pred)
@@ -224,7 +226,10 @@ if __name__ == '__main__':
     clf_temp.add(Dense(6, activation='softmax'))
     
     clf.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    clf.fit(X_train, y_train, batch_size=nb_batch,  epochs=nb_epoch, validation_split = val_split, class_weight='balanced')#, callbacks=[checkpointer])
+    clf.fit(X_train, y_train, batch_size=nb_batch,  epochs=nb_epoch, validation_split = val_split, callbacks=[checkpointer]) #, class_weight='balanced'
+    print('---------------------------------------------------------------------------------------------------CLF PROBLEM ---------------------------------------------------')
+    print(clf)
+    print(type(clf))
     print(return_accuracy(clf))
     
     clf_temp.load_weights(best_model_path)
@@ -296,10 +301,11 @@ if __name__ == '__main__':
     
     clf.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
     
-    clf.fit(X_train, y_train, batch_size=nb_batch, epochs=nb_epoch, validation_split = val_split, class_weight='balanced')#, callbacks=[checkpointer])
+    clf.fit(X_train, y_train, batch_size=nb_batch, epochs=nb_epoch, validation_split = val_split, callbacks=[checkpointer])
     
-    y_pred = clf.predict_classes(X_test)
+    
 
+    y_pred = clf.predict(X_test)
 
     f1_accuracy['parent'] = f1_score(y_test.values, y_pred, average='macro')
     BA_accuracy['parent'] = balanced_accuracy_score(y_test.values, y_pred)
@@ -328,7 +334,7 @@ if __name__ == '__main__':
         checkpointer = ModelCheckpoint(filepath=best_model_path, verbose=1, save_best_only=True)
     
         
-        clf.fit(X_train, y_train, batch_size=nb_batch, validation_split = val_split, epochs=nb_epoch, class_weight='balanced')#, callbacks=[checkpointer])
+        clf.fit(X_train, y_train, batch_size=nb_batch, validation_split = val_split, epochs=nb_epoch, callbacks=[checkpointer])
         
         y_pred = clf.predict_classes(X_test)
 
